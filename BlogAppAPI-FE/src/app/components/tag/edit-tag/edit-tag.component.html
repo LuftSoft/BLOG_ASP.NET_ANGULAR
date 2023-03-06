@@ -1,0 +1,22 @@
+<h1 class="mbb-2">Chỉnh sửa thẻ</h1>
+<form (submit)="editTag()" *ngIf="tag">
+    <div class="div">
+        <label for="" class="form-label">ID</label>
+        <input type="text" disabled class="form-control" [(ngModel)]="tag.tagId" name="tagId" id="tagId">
+        <p style="color: red;"></p>
+    </div>
+    <div class="div">
+        <label for="" class="form-label">Tên thẻ</label>
+        <input type="text" class="form-control" [(ngModel)]="tag.tagName" name="tagName" id="tagName">
+        <p style="color: red;"></p>
+    </div>
+    <div class="div">
+        <label for="" class="form-label">Mô tả</label>
+        <input type="text" class="form-control" [(ngModel)]="tag.tagDescription" name="tagDescription"
+            id="tagDescription">
+        <p style="color: red;"></p>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-success">Lưu thay đổi</button>
+    </div>
+</form>

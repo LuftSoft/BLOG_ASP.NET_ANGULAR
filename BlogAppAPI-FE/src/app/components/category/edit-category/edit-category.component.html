@@ -1,0 +1,30 @@
+<h1 class="mb-2">Chỉnh sửa thể loại</h1>
+<form (submit)="editCategory()" *ngIf="cate">
+    <div class="div">
+        <label for="" class="form-label">ID</label>
+        <input type="text" name="CategoryId" id="CategoryId" class="form-control" disabled [(ngModel)]="cate.categoryId"
+            value="{{cate.categoryId}}">
+        <p style="color: red;"></p>
+    </div>
+    <div class="div">
+        <label for="" class="form-label">Tên thể loại</label>
+        <input type="text" name="CategoryName" id="CategoryName" class="form-control" [(ngModel)]="cate.name"
+            value="{{cate.name}}">
+        <p style="color: red;"></p>
+    </div>
+    <div class="div">
+        <label for="" class="form-label">Mô tả</label>
+        <input type="text" name="CategoryDescription" id="CategoryDescription" class="form-control"
+            [(ngModel)]="cate.description" value="{{cate.description}}">
+        <p style="color: red;"></p>
+    </div>
+    <div class="div mb-4">
+        <label for="" class="form-label">Slug</label>
+        <input type="text" name="CategorySlug" id="CategorySlug" class="form-control" [(ngModel)]="cate.categorySlug"
+            value="{{cate.categorySlug}}">
+        <p style="color: red;"></p>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-success">Chỉnh sửa</button>
+    </div>
+</form>

@@ -1,0 +1,27 @@
+<h1 class="mbb-2">Danh sách thể loại</h1>
+<div class="h-100">
+    <div class="py-3"><a [routerLink]="['/category/create']" class="btn btn-success">Tạo thể loại mới</a></div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Tiêu thể loại</th>
+                <th scope="col">Mô tả</th>
+                <th scope="col">Slug</th>
+                <th scope="col">Chỉnh sửa</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let i of cates; let j = index">
+            <tr scope="row" style="line-height: 2;">
+                <td>{{j+1}}</td>
+                <td>{{i.name}}</td>
+                <td>{{i.description}}</td>
+                <td>{{i.categorySlug}}</td>
+                <td>
+                    <a [routerLink]="['/category/edit',i.categorySlug]" class="btn btn-warning me-2">Chỉnh sửa</a>
+                    <a [routerLink]="['/category/delete',i.categorySlug]" class="btn btn-danger">Xóa</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

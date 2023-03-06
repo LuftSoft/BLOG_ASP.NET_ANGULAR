@@ -1,0 +1,25 @@
+<h1 class="mbb-2">Danh sách người dùng</h1>
+<div class="h-100">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Tên người dùng</th>
+                <th>Email</th>
+                <th>Chỉnh sửa</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let item of users, let i = index">
+            <tr>
+                <td>{{i+1}}</td>
+                <td>{{item.userName}}</td>
+                <td>{{item.email}}</td>
+                <td>
+                    <a [routerLink]="['/user/detail', item.id]" class="btn btn-primary me-2">Chi tiết</a>
+                    <a [routerLink]="['/user/edit', item.id]" class="btn btn-warning me-2">Chỉnh sửa</a>
+                    <a [routerLink]="['/user/delete']" class="btn btn-danger">Khóa</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,29 @@
+<h1 class="mb-2">Chỉnh sửa</h1>
+<form (submit)="editPost()" *ngIf="post">
+    <div class="div">
+        <label for="" class="form-label">Tên bài viết</label>
+        <input type="text" class="form-control" name="postTitle" id="postTitle" [(ngModel)]="post.postTitle">
+        <p style="color: red;"></p>
+    </div>
+    <div class="div">
+        <label for="" class="form-label">Mô tả</label>
+        <input type="text" class="form-control" name="postDescription" id="postDescription"
+            [(ngModel)]="post.postDescription">
+        <p style="color: red;"></p>
+    </div>
+    <div class="div">
+        <label for="" class="form-label">Nội dung</label>
+        <textarea name="" id="" class="w-100" rows="10" name="postContent" id="postContent"
+            [(ngModel)]="post.postContent">
+        </textarea>
+        <p style="color: red;"></p>
+    </div>
+    <div class="div mb-4">
+        <label for="" class="form-label">Slug</label>
+        <input type="text" class="form-control" name="postSlug" id="postSlug" [(ngModel)]="post.postSlug">
+        <p style="color: red;"></p>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-success">Lưu thay đổi</button>
+    </div>
+</form>

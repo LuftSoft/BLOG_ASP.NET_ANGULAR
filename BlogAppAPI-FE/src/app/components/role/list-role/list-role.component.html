@@ -1,0 +1,25 @@
+<h1 class="mbb-2">Danh sách role</h1>
+<div class="h-100">
+    <div class="py-3"><a [routerLink]="['/role/create']" class="btn btn-success">Tạo role mới</a></div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>ID</th>
+                <th>Tên</th>
+                <th>Chỉnh sửa</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let item of roles, let idx = index">
+            <tr>
+                <td>{{idx+1}}</td>
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>
+                    <a [routerLink]="['/role/edit',item.id]" class="btn btn-warning me-2">Chỉnh sửa</a>
+                    <a [routerLink]="['/role/delete']" class="btn btn-danger">Xóa</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

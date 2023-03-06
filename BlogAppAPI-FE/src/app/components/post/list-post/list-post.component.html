@@ -1,0 +1,26 @@
+<h1 class="mbb-2">Danh sách bài viết</h1>
+<div class="h-100">
+    <div class="py-3"><a [routerLink]="['/post/create']" class="btn btn-success">Tạo bài viết</a></div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Tiêu đề</th>
+                <th>Ngày đăng</th>
+                <th>Chỉnh sửa</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let item of listPost, let i = index">
+            <tr>
+                <td>{{i+1}}</td>
+                <td>{{item.postTitle}}</td>
+                <td>{{item.createDate}}</td>
+                <td>
+                    <a [routerLink]="['/post/detail',item.postSlug]" class="me-2 btn btn-primary">Chi tiết</a>
+                    <a [routerLink]="['/post/edit',item.postSlug]" class="btn btn-warning me-2">Chỉnh sửa</a>
+                    <a class="btn btn-danger" (click)="delete()">Xóa</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

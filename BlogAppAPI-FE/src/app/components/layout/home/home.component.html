@@ -1,0 +1,10 @@
+<div class="list-group" *ngFor="let item of listPost">
+    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{item.postTitle}}</h5>
+            <small>3 days ago</small>
+        </div>
+        <p class="mb-1">{{item.postDescription}}</p>
+        <small>{{item.createDate}} by <a>author name</a></small>
+    </a>
+</div>

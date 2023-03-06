@@ -1,0 +1,35 @@
+<h1 class="mbb-2">Chi tiết user</h1>
+<form action="">
+    <a [routerLink]="['/user/edit']" class="btn btn-info me-2">Chỉnh sửa</a><a class="btn btn-danger">Khóa tài
+        khoản</a>
+    <div class="div">
+        <label for="" class="form-label">Tên người dùng</label>
+        <input type="text" class="form-control" disabled [value]="user.userName">
+        <p style="color: red;"></p>
+    </div>
+    <div class="div">
+        <label for="" class="form-label">Email</label>
+        <input type="text" class="form-control" disabled [value]="user.email">
+        <p style="color: red;"></p>
+    </div>
+    <div class="div">
+        <label for="" class="form-label">Số điện thoại</label>
+        <input type="text" class="form-control" disabled [value]="user.phoneNumber">
+        <p style="color: red;"></p>
+    </div>
+    <div class="div">
+        <label for="" class="form-label">Địa chỉ</label>
+        <input type="text" class="form-control" disabled [value]="user.userAddress">
+        <p style="color: red;"></p>
+    </div>
+    <div class="div">
+        <label for="" class="form-label">Skill</label>
+        <input type="text" class="form-control" disabled>
+        <p style="color: red;"></p>
+    </div>
+    <div class="div">
+        <label for="" class="form-label">Slug</label>
+        <input type="text" class="form-control" disabled>
+        <p style="color: red;"></p>
+    </div>
+</form>

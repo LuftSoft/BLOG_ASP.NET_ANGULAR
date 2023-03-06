@@ -1,0 +1,31 @@
+<div class="w-50 mt-5" style="margin: auto;">
+    <div class="text-center">
+        <form>
+            <h2 class="mb-3">Đăng ký</h2>
+            <div>
+                <input type="text" id="userName" name="userName" class="form-control" placeholder="Tên đăng nhập">
+                <p style="color: red;"></p>
+            </div>
+            <div>
+                <input type="password" id="userPassword" name="userPassword" class="form-control"
+                    placeholder="Mật khẩu">
+                <p style="color: red;"></p>
+            </div>
+            <div>
+                <input type="text" id="userAuthorName" name="userAuthorName" class="form-control"
+                    placeholder="Tên hiển thị">
+                <p style="color: red;"></p>
+            </div>
+            <div>
+                <input type="text" id="userSlug" name="userSlug" class="form-control" placeholder="Slug">
+                <p style="color: red;"></p>
+            </div>
+
+            <div>
+                <button type="submit" class=" w-100 custom-button-dark">Đăng ký</button>
+                <p style="text-align: right;" class="mt-3">Bạn đã có tài khoản? <a [routerLink]="['/auth/signin']"
+                        routerLinkActive="router-link-active" style="color: rgba(249, 58, 19, 1);">Đăng nhập</a></p>
+            </div>
+        </form>
+    </div>
+</div>

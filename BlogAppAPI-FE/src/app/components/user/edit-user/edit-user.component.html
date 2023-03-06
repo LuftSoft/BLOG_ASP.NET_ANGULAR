@@ -1,0 +1,36 @@
+<h1 class="mbb-2">Chỉnh sửa user</h1>
+<form action="">
+    <div class="div">
+        <label for="" class="form-label">Tên người dùng</label>
+        <input type="text" class="form-control" name="userName" id="userName" [(ngModel)]="user.userName">
+        <p style="color: red;"></p>
+    </div>
+    <div class="div">
+        <label for="" class="form-label">Email</label>
+        <input type="text" class="form-control" name="email" id="email" [(ngModel)]="user.email">
+        <p style="color: red;"></p>
+    </div>
+    <div class="div">
+        <label for="" class="form-label">Số điện thoại</label>
+        <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" [(ngModel)]="user.phoneNumber">
+        <p style="color: red;"></p>
+    </div>
+    <div class="div">
+        <label for="" class="form-label">Địa chỉ</label>
+        <input type="text" class="form-control" name="userAddress" id="userAddress" [(ngModel)]="user.userAddress">
+        <p style="color: red;"></p>
+    </div>
+    <div class="div">
+        <label for="" class="form-label">Skill</label>
+        <input type="text" class="form-control">
+        <p style="color: red;"></p>
+    </div>
+    <div class="div">
+        <label for="" class="form-label">Slug</label>
+        <input type="text" class="form-control">
+        <p style="color: red;"></p>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-success">Lưu thay đổi</button>
+    </div>
+</form>
