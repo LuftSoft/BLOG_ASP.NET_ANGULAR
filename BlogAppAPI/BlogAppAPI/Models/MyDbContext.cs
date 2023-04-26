@@ -40,13 +40,21 @@ namespace BlogAppAPI.Models
             });
 
             modelBuilder.Entity<Tag>(builder => {
-               
+                builder.HasIndex(t => t.TagName)
+                    .IsUnique();
             });
             modelBuilder.Entity<CustomUser>(builder => {
                 builder.HasIndex(u=>u.Email)
                     .IsUnique();
                 builder.HasIndex(u => u.UserName)
                     .IsUnique();
+            });
+            modelBuilder.Entity<Category>(builder => {
+                builder.HasIndex(c => c.CategorySlug)
+                    .IsUnique();
+            });
+            modelBuilder.Entity<Author>(builder => {
+                builder.Property(a => a.AuthorSlug);
             });
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

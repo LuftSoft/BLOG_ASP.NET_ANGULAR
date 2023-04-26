@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { APIService } from 'src/app/services/API.service';
-import { MessageService } from 'src/app/services/Message.service';
+import { DataService } from 'src/app/services/Data.service';
 
 @Component({
   selector: 'app-edit-tag',
@@ -10,7 +10,7 @@ import { MessageService } from 'src/app/services/Message.service';
 })
 export class EditTagComponent implements OnInit {
   tagId: any; tag: any;
-  constructor(private api: APIService, private msg: MessageService, private route: ActivatedRoute) {
+  constructor(private api: APIService, private msg: DataService, private route: ActivatedRoute) {
     route.params.subscribe(data => this.tagId = data.id)
   }
 
@@ -19,6 +19,8 @@ export class EditTagComponent implements OnInit {
     this.api.get(`${this.msg.URL}/tag/detail?id=${this.tagId}`)
       .subscribe(data => { this.tag = data; })
   }
+
+
   editTag() { }
 
 }

@@ -1,24 +1,26 @@
 <h1 class="mbb-2">Tạo bài viết</h1>
-<form action="">
+<form (submit)="createPost()">
     <div class="div">
         <label for="" class="form-label">Tên bài viết</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" id="postTitle" name="postTitle" [(ngModel)]="post.postTitle"
+            placeholder="Tên bài viết">
         <p style="color: red;"></p>
     </div>
     <div class="div">
         <label for="" class="form-label">Mô tả</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" id="postDescription" name="postDescription"
+            [(ngModel)]="post.postDescription" placeholder="Mô tả">
         <p style="color: red;"></p>
     </div>
     <div class="div">
         <label for="" class="form-label">Nội dung</label>
-        <textarea name="" id="" class="w-100" rows="10">
-        </textarea>
+        <ckeditor type="divarea" [(ngModel)]="post.postContent" name="postContent" id="postContent"></ckeditor>
         <p style="color: red;"></p>
     </div>
     <div class="div mb-4">
         <label for="" class="form-label">Slug</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" id="postSlug" name="postSlug" [(ngModel)]="post.postSlug"
+            placeholder="Slug">
         <p style="color: red;"></p>
     </div>
     <div>

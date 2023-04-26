@@ -1,13 +1,15 @@
 <h1 class="mbb-2">Tạo thẻ mới</h1>
-<form action="">
+<form (submit)="createTag()">
     <div class="div">
-        <label for="" class="form-label">Tên thẻ</label>
-        <input type="text" class="form-control">
+        <label for="tagName" class="form-label">Tên thẻ</label>
+        <input type="text" class="form-control" name="tagName" id="tagName" [(ngModel)]="tag.tagName"
+            placeholder="Tên thẻ">
         <p style="color: red;"></p>
     </div>
     <div class="div">
-        <label for="" class="form-label">Mô tả</label>
-        <input type="text" class="form-control">
+        <label for="tagDescription" class="form-label">Mô tả</label>
+        <input type="text" class="form-control" name="tagDescription" id="tagDescription"
+            [(ngModel)]="tag.tagDescription" placeholder="Mô tả">
         <p style="color: red;"></p>
     </div>
     <div>

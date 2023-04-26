@@ -18,13 +18,24 @@ import { AuthSignupComponent } from '../components/auth/auth-signup/auth-signup.
 import { CreateRoleComponent } from '../components/role/create-role/create-role.component';
 import { DetailUserComponent } from '../components/user/detail-user/detail-user.component';
 import { HomeComponent } from '../components/layout/home/home.component';
+import { ManageComponent } from '../components/layout/manage/manage.component';
+import { ProfileUserComponent } from '../components/user/profile-user/profile-user.component';
+import { TestUploadComponent } from '../components/test/test-upload/test-upload.component';
+import { NotfoundComponent } from '../components/layout/notfound/notfound.component';
+import { AuthGuard } from '../components/auth/AuthGuard';
 
 const routes: Routes = [
   {
     path: "", component: HomeComponent
   },
   {
+    path: "manage", children: [
+      { path: "", component: ManageComponent }
+    ]
+  },
+  {
     path: "post", children: [
+      { path: "", component: HomeComponent },
       { path: "create", component: CreatePostComponent },
       { path: "list", component: ListPostComponent },
       { path: "edit/:slug", component: EditPostComponent },
@@ -49,14 +60,15 @@ const routes: Routes = [
     path: "user", children: [
       { path: "list", component: ListUserComponent },
       { path: "edit/:id", component: EditUserComponent },
-      { path: "detail/:id", component: DetailUserComponent }
+      { path: "detail/:id", component: DetailUserComponent },
+      { path: "profile/:id", component: ProfileUserComponent }
     ]
   },
   {
     path: "role", children: [
-      { path: "create", component: CreateRoleComponent },
-      { path: "list", component: ListRoleComponent },
-      { path: "edit/:slug", component: EditRoleComponent },
+      { path: "create", component: CreateRoleComponent, canActivate: [AuthGuard] },
+      { path: "list", component: ListRoleComponent, canActivate: [AuthGuard] },
+      { path: "edit/:slug", component: EditRoleComponent, canActivate: [AuthGuard] },
     ]
   },
   {
@@ -65,6 +77,14 @@ const routes: Routes = [
       { path: "signup", component: AuthSignupComponent },
     ]
   },
+  {
+    path: "test", children: [
+      { path: "upload-image", component: TestUploadComponent }
+    ]
+  },
+  {
+    path: "**", component: NotfoundComponent
+  }
 ];
 
 export const BlogRoutes = RouterModule.forChild(routes);

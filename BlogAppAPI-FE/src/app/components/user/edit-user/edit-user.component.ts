@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { APIService } from 'src/app/services/API.service';
-import { MessageService } from 'src/app/services/Message.service';
+import { DataService } from 'src/app/services/Data.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -11,7 +11,7 @@ import { MessageService } from 'src/app/services/Message.service';
 export class EditUserComponent implements OnInit {
   id: any
   user: any
-  constructor(private api: APIService, private msg: MessageService, private route: ActivatedRoute) {
+  constructor(private api: APIService, private msg: DataService, private route: ActivatedRoute) {
     this.route.params.subscribe(p => this.id = p.id);
   }
 

@@ -2,7 +2,7 @@
 using System.Net;
 using System.Text;
 
-namespace BlogAppAPI.Services
+namespace BlogAppAPI.Services.Sendmail
 {
     public class SendMailSMTP
     {

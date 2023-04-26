@@ -1,5 +1,6 @@
 ﻿using BlogAppAPI.Models.Auth;
 using BlogAppAPI.Repository.Auth;
+using BlogAppAPI.Services.Payload;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -18,7 +19,7 @@ namespace BlogAppAPI.Controllers
 
         [HttpPost(Name = "signup")]
         public async Task<IActionResult> signup(SignupModel signupModel)
-        {
+        {   
             var rel = await accountRepository.SignupAsync(signupModel);
             if (rel.Succeeded)
             {
@@ -29,12 +30,35 @@ namespace BlogAppAPI.Controllers
         [HttpPost(Name = "signin")]
         public async Task<IActionResult> signin(SigninModel signinModel)
         {
-            var rel = await accountRepository.SigninAsync(signinModel);
-            if (string.IsNullOrEmpty(rel))
+            try
             {
-                return BadRequest();
+                var rel = await accountRepository.SigninAsync(signinModel);
+                if (rel == null)
+                {
+                    return BadRequest(new APIResponse() 
+                    { Success = false,
+                      Message = "Incorrect username or password",
+                      StatusCode = System.Net.HttpStatusCode.NotFound
+                    });
+                }
+                return Ok(new APIResponse()
+                {
+                    Success = true,
+                    Message = "Login success",
+                    Payload = rel,
+                    StatusCode = System.Net.HttpStatusCode.OK
+                });
             }
-            return Ok(rel);
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest(new APIResponse()
+                {
+                    Success = false,
+                    Message = ex.Message,
+                    StatusCode = System.Net.HttpStatusCode.NotFound
+                });
+            }
         }
     }
 }

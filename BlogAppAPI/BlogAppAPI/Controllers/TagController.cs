@@ -1,4 +1,5 @@
 ﻿using BlogAppAPI.Models;
+using BlogAppAPI.Services.Payload;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -32,13 +33,25 @@ namespace BlogAppAPI.Controllers
                 if (pageInt >= 0 && pageInt <= Page_num)
                 {
                     var relsult = listTag.Skip(page_size * pageInt).Take(page_size);
-                    return Ok(relsult);
+                    return Ok(new APIResponse()
+                    {   
+                        Success = true,
+                        Payload = new { rel = relsult, page_total = Page_num }
+                    });
                 }
-                return BadRequest();
+                return BadRequest(new APIResponse()
+                {
+                    Success = false,
+                    Message = "get list tag failed"
+                });
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new APIResponse()
+                {
+                    Success = false,
+                    Message = ex.Message
+                });
             }
         }
         [HttpGet]
@@ -67,11 +80,21 @@ namespace BlogAppAPI.Controllers
             {
                 var rel = await context.Tags.AddAsync(tag);
                 await context.SaveChangesAsync();
-                return Ok(rel.State);
+                return Ok(new APIResponse()
+                {
+                    Success = true,
+                    Message = "create tag success",
+                    StatusCode = System.Net.HttpStatusCode.OK
+                });
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new APIResponse()
+                {
+                    Success = false,
+                    Message = ex.Message,
+                    StatusCode = System.Net.HttpStatusCode.BadRequest
+                });
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using BlogAppAPI.Models;
+using BlogAppAPI.Services.Payload;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -38,7 +39,12 @@ namespace BlogAppAPI.Controllers
             if(page<=page_count && page >= 0)
             {   
                 var rel = users.Skip(page*page_size).Take(page_size);
-                return Ok(rel);
+                return Ok(new APIResponse()
+                {
+                    Success = true,
+                    Payload = new { rel = rel, page_total = page_count },
+                    StatusCode = System.Net.HttpStatusCode.OK
+                });
             }
             return BadRequest();
         }
@@ -49,12 +55,32 @@ namespace BlogAppAPI.Controllers
             try
             {
                 var user = await context.Users.FindAsync(id);
-                if (user != null) return Ok(user);
-                return BadRequest();
+                if (user != null) return Ok(new APIResponse() { 
+                    Success = true,
+                    Payload = new
+                    {
+                        userName = user.UserName,
+                        email = user.Email,
+                        phoneNumber = user.PhoneNumber,
+                        userAdress = user.UserAdress
+                    },
+                    StatusCode = System.Net.HttpStatusCode.OK
+                });
+                return BadRequest(new APIResponse()
+                {
+                    Success = false,
+                    Message = "get user failed",
+                    StatusCode = System.Net.HttpStatusCode.NotFound
+                });
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new APIResponse()
+                {
+                    Success = false,
+                    Message = ex.Message,
+                    StatusCode = System.Net.HttpStatusCode.NotFound
+                });
             }
         }
         /*[HttpGet]

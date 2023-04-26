@@ -22,14 +22,14 @@ namespace BlogAppAPI.Repository.Auth
             this.configuration = configuration;
         }
         //dang nhap
-        public async Task<string> SigninAsync(SigninModel model)
+        public async Task<object?> SigninAsync(SigninModel model)
         {
             var rel = await signinManager.PasswordSignInAsync(model.Email, model.Password, false, false);
             
 
             if (!rel.Succeeded)
             {
-                return string.Empty;
+                return null;
             }
             //tim role cua user
             var userRole = await userManager.FindByEmailAsync(model.Email);
@@ -51,7 +51,7 @@ namespace BlogAppAPI.Repository.Auth
                 claims:authClaim,
                 signingCredentials: new SigningCredentials(authKey,SecurityAlgorithms.HmacSha512)
                 );
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            return new {token = new JwtSecurityTokenHandler().WriteToken(token), user = new { userName = userRole.UserName, userId = userRole.Id } };
         }
 
         //dang ky

@@ -22,4 +22,5 @@
             </tr>
         </tbody>
     </table>
+    <app-pagination #pagination [name]="pageName" [page_total]="pageTotal" (paging)="paging($event)"></app-pagination>
 </div>

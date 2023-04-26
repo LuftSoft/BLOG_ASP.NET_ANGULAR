@@ -7,9 +7,9 @@
         <h2 class="blog-post-title">{{post.postTitle}}</h2>
         <p class="blog-post-meta">{{post.createDate}} by <a href="#">author name</a></p>
 
-        <p>{{post.postDescription}}</p>
+        <div>{{post.postDescription}}</div>
         <hr>
-        <p>{{post.postContent}}</p>
+        <div [innerHTML]="post.postContent"></div>
     </article>
 
 </div>

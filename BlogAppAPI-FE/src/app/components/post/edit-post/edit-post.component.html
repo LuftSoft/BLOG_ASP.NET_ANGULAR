@@ -13,9 +13,7 @@
     </div>
     <div class="div">
         <label for="" class="form-label">Nội dung</label>
-        <textarea name="" id="" class="w-100" rows="10" name="postContent" id="postContent"
-            [(ngModel)]="post.postContent">
-        </textarea>
+        <ckeditor type="divarea" [(ngModel)]="post.postContent" name="postContent" id="postContent"></ckeditor>
         <p style="color: red;"></p>
     </div>
     <div class="div mb-4">

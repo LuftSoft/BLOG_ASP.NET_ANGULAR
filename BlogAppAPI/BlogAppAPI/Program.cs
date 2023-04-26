@@ -1,6 +1,7 @@
 using BlogAppAPI.Models;
 using BlogAppAPI.Repository.Auth;
-using BlogAppAPI.Services;
+using BlogAppAPI.Services.ControllerService;
+using BlogAppAPI.Services.Sendmail;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -22,7 +23,7 @@ builder.Services.AddControllers().AddJsonOptions(option =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+//
 //them dbcontext
 builder.Services.AddDbContext<MyDbContext>(options =>
 {
@@ -31,7 +32,6 @@ builder.Services.AddDbContext<MyDbContext>(options =>
 
 //them service send mail
 builder.Services.AddTransient<ISendMailService, SendMailService>();
-
 //them config  vao
 var mailConfig = builder.Configuration.GetSection("MailSettings");
 builder.Services.Configure<MailConfig>(mailConfig);
@@ -64,7 +64,7 @@ builder.Services.Configure<IdentityOptions>(options =>
         MaxFailedAccessAttempts = 5
     };
 });
-//cai nay la cai gi???
+//add authenticate bang jwt
 builder.Services.AddAuthentication(option =>
 {
     option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -84,10 +84,11 @@ builder.Services.AddAuthentication(option =>
 
         };
     });
-//cai nay la cai gi???
+
 
 //
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+builder.Services.AddScoped<IPostService, PostService>();
 
 builder.Services.AddCors(p => p.AddPolicy("CrossOrigin", build =>
 {

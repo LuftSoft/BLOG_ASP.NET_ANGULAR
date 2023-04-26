@@ -19,8 +19,10 @@
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
     "bootstrap": "^5.2.3",
+    "ckeditor4-angular": "^3.2.2",
     "dotenv": "^16.0.3",
-    "jquery": "^3.6.3",
+    "jquery": "^3.6.4",
+    "ngx-pagination": "^6.0.3",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

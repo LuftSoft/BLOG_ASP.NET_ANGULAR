@@ -4,28 +4,29 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 
-namespace BlogAppAPI.Services
+namespace BlogAppAPI.Services.Sendmail
 {
     public class SendMailService : ISendMailService
     {
         IConfigurationSection _mailConfig;
-        public SendMailService() { 
-            this._mailConfig = StaticMethod.GetConfiguration().GetSection("MailSettings");
+        public SendMailService()
+        {
+            _mailConfig = StaticMethod.GetConfiguration().GetSection("MailSettings");
         }
 
         public async Task<string> SendMail(MailContent content)
         {
-                var email = new MimeMessage();
-                email.Sender = new MailboxAddress("TANNGOC", "luffschloss@gmail.com");
-                email.From.Add(new MailboxAddress("TANNGOC", "luffschloss@gmail.com"));
-                email.To.Add(new MailboxAddress("factyel.bttn@gmail.com", "factyel.bttn@gmail.com"));
+            var email = new MimeMessage();
+            email.Sender = new MailboxAddress("TANNGOC", "luffschloss@gmail.com");
+            email.From.Add(new MailboxAddress("TANNGOC", "luffschloss@gmail.com"));
+            email.To.Add(new MailboxAddress("factyel.bttn@gmail.com", "factyel.bttn@gmail.com"));
 
-                var builder = new BodyBuilder();
-                builder.HtmlBody = content.Body;
+            var builder = new BodyBuilder();
+            builder.HtmlBody = content.Body;
 
-                email.Body = builder.ToMessageBody();
+            email.Body = builder.ToMessageBody();
 
-                using var smtp = new MailKit.Net.Smtp.SmtpClient();
+            using var smtp = new MailKit.Net.Smtp.SmtpClient();
 
             try
             {
@@ -48,9 +49,9 @@ namespace BlogAppAPI.Services
         {
             throw new NotImplementedException();
         }
-        
+
     }
-    
+
 
     public class MailContent
     {

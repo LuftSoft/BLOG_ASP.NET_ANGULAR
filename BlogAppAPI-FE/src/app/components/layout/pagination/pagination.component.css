@@ -1,0 +1,19 @@
+a {
+    background-color: #282A3A;
+}
+
+nav {
+    display: flex;
+    justify-content: right;
+}
+
+a:hover {
+    color: #282A3A !important;
+    border: 1px solid #282A3A !important;
+    background-color: #fff !important;
+}
+
+
+li:hover {
+    cursor: pointer;
+}

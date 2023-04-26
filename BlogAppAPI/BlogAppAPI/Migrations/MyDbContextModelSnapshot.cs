@@ -95,6 +95,9 @@ namespace BlogAppAPI.Migrations
 
                     b.HasKey("CategoryId");
 
+                    b.HasIndex("CategorySlug")
+                        .IsUnique();
+
                     b.ToTable("Category");
                 });
 
@@ -157,6 +160,10 @@ namespace BlogAppAPI.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Email")
+                        .IsUnique()
+                        .HasFilter("[Email] IS NOT NULL");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -164,6 +171,10 @@ namespace BlogAppAPI.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.HasIndex("UserName")
+                        .IsUnique()
+                        .HasFilter("[UserName] IS NOT NULL");
 
                     b.ToTable("Users", (string)null);
                 });
@@ -249,7 +260,6 @@ namespace BlogAppAPI.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TagId"));
 
                     b.Property<string>("TagDescription")
-                        .IsRequired()
                         .HasColumnType("ntext");
 
                     b.Property<string>("TagName")
@@ -258,6 +268,9 @@ namespace BlogAppAPI.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("TagId");
+
+                    b.HasIndex("TagName")
+                        .IsUnique();
 
                     b.ToTable("Tag");
                 });

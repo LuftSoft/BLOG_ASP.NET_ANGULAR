@@ -1,6 +1,6 @@
 export interface CategoryModel {
     categoryId: any;
-    came: any;
+    name: any;
     description: any;
     categorySlug: any;
 }

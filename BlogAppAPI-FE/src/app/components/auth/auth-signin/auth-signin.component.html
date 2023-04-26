@@ -1,14 +1,19 @@
 <div class="w-50 mt-5" style="margin: auto;">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="data.message !== ''">
+        <span [textContent]="data.message"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     <div class="text-center">
-        <form>
+        <form (submit)="signin()">
             <h2 class="mb-3">Đăng nhập</h2>
             <div class="mb-3">
-                <input type="text" id="userName" name="userName" class="form-control" placeholder="Tên đăng nhập">
+                <input type="text" id="userName" name="userName" class="form-control" placeholder="Tên đăng nhập"
+                    [(ngModel)]="payload.Email">
                 <p style="color: red;"></p>
             </div>
             <div class="mb-3">
-                <input type="password" id="userPassword" name="userPassword" class="form-control"
-                    placeholder="Mật khẩu">
+                <input type="password" id="userPassword" name="userPassword" class="form-control" placeholder="Mật khẩu"
+                    [(ngModel)]="payload.Password">
                 <p style="color: red;"></p>
             </div>
             <div>

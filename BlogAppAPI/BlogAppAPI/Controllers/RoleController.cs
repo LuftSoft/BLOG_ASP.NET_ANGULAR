@@ -1,7 +1,9 @@
 ﻿using BlogAppAPI.Models;
+using BlogAppAPI.Services.Payload;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Org.BouncyCastle.Ocsp;
 
 namespace BlogAppAPI.Controllers
 {
@@ -31,9 +33,17 @@ namespace BlogAppAPI.Controllers
             if (page <= page_count && page >= 0)
             {
                 var rel = roles.Skip(page * page_size).Take(page_size);
-                return Ok(rel);
+                return Ok(new APIResponse() 
+                { 
+                    Success = true,
+                    Payload = new {rel = rel, page_total = page_count}
+                });
             }
-            return BadRequest();
+            return BadRequest(new APIResponse()
+            {
+                Success = false,
+                Message = "get list role failed"
+            });
         }
         [HttpPost]
         public async Task<IActionResult> create(IdentityRole role)

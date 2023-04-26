@@ -1,0 +1,12 @@
+<form (submit)="upload(uploadForm.value)" [formGroup]="uploadForm">
+    <div class="mb-4">
+        <label for="fileUpload" class="form-label">name</label>
+        <input type="text" class="form-control" name="fileName" id="fileUpload" required formControlName="fileName">
+    </div>
+    <div class="mb-4">
+        <label for="fileUpload" class="form-label">image</label>
+        <input type="file" class="form-control" name="fileUpload" id="fileUpload" formControlName="fileUpload" required
+            (change)="changeSelectedFile($event)">
+    </div>
+    <button type="submit" class="btn btn-info">Submit</button>
+</form>

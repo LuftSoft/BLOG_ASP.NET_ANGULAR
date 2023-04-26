@@ -1,7 +1,12 @@
 ﻿using BlogAppAPI.Models;
+using BlogAppAPI.Services.ControllerService;
+using BlogAppAPI.Services.Payload;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Query;
+using Org.BouncyCastle.Ocsp;
 using Org.BouncyCastle.Utilities;
+using System.Net;
 
 namespace BlogAppAPI.Controllers
 {
@@ -9,129 +14,72 @@ namespace BlogAppAPI.Controllers
     [Route("/api/v1/post/[action]")]
     public class PostController : ControllerBase
     {
-        private MyDbContext context;
+        private readonly MyDbContext context;
+        private readonly IPostService postService;
 
-        public PostController(MyDbContext context) {
+        public PostController(MyDbContext context, IPostService _postService) {
             this.context = context;
+            this.postService = _postService;
         }
         //can sua cho nay`
-        [HttpGet(Name = "")]
+        [HttpGet]
         public async Task<IActionResult> list(string page)
+        {   
+            var result = await this.postService.list(page);
+            if(result.Success){return Ok(result);}
+            else{return BadRequest(result);}
+        }
+        //
+        [HttpGet]
+        [Route("/api/v1/post/{category}")]
+        public async Task<IActionResult> find_by_category(string category, int page) {
+            var result = await this.postService.find_by_category(category, page);
+            if(result.Success)  { return Ok(result); }
+            else  { return BadRequest(result); }
+        }
+        [HttpGet]
+        public async Task<IActionResult> search(string keyword, int page)
         {
-            int page_size = 10;
-            try
-            {
-                var listPost = (from post in context.Posts select post).ToList();
-                var Page_num = (int)Math.Ceiling((double)listPost.Count / 10);
-                if (string.IsNullOrEmpty(page))
-                {
-                    return Ok(listPost.Take(page_size));
-                }
-                var pageInt = Int32.Parse(page);
-                if(pageInt>=0 && pageInt<=Page_num)
-                {
-                    var relsult = listPost.Skip(page_size * pageInt).Take(page_size);
-                    return Ok(relsult);
-                }
-                return BadRequest();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var result = await this.postService.search(keyword, page);
+            if(result.Success) return Ok(result);
+            return BadRequest(result);
         }
         [HttpGet]
         public async Task<IActionResult> detail (string slug) {
-            try
-            {   
-                var post = (from p in context.Posts
-                            where p.PostSlug == slug
-                            select p).FirstOrDefault();
-                if(post != null)
-                {
-                    return Ok(post);
-                }
-                return BadRequest();
-            }   
-            catch(Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var result = await this.postService.detail(slug);
+            if (result.Success) { return Ok(result); }
+            else { return BadRequest(result); }
         }
 
         [HttpGet]
         [Route("/api/v1/post/detail_pathvariable/{slug}")]
         public async Task<IActionResult> detail_pathvariable(string slug)
         {
-            try
-            {
-                var post = (from p in context.Posts
-                            where p.PostSlug == slug
-                            select p).FirstOrDefault();
-                if (post != null)
-                {
-                    return Ok(post);
-                }
-                return BadRequest();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var result = await this.postService.detail_pathvariable(slug);
+            if (result.Success) { return Ok(result); }
+            else { return BadRequest(result); }
         }
         [HttpPost]
         public async Task<IActionResult> create (Post post) {
-            try
-            {
-                var author = context.Authors.FirstOrDefault(a=>a.AuthorId == post.AuthorId);
-                post.Author = author;
-                var rel = await context.Posts.AddAsync(post);
-                await context.SaveChangesAsync();
-                return Ok(rel.State);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var result = await this.postService.create(post);
+            if (result.Success) { return Ok(result); }
+            else { return BadRequest(result); }
         }
 
         [HttpDelete]
         public async Task<IActionResult> delete(Post post)
         {
-            try
-            {
-                var rel = context.Posts.Remove(post);
-                await context.SaveChangesAsync();
-                return Ok(rel.State);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var result = await this.postService.delete(post);
+            if (result.Success) { return Ok(result); }
+            else { return BadRequest(result); }
         }
 
         [HttpPut]
         public async Task<IActionResult> edit(Post post)
         {
-            try
-            {
-                var p = context.Posts.FirstOrDefault(p => p.PostId == post.PostId);
-                if(p != null)
-                {
-                    p.UpdateDate = DateTime.Now;
-                    p.PostContent = post.PostContent;
-                    p.PostDescription = post.PostDescription;
-                    p.PostSlug = post.PostSlug;
-                    context.Posts.Update(p);
-                    await context.SaveChangesAsync();
-                    return Ok();
-                }
-                return BadRequest();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var result = await this.postService.edit(post);
+            if (result.Success) { return Ok(result); }
+            else { return BadRequest(result); }
         }
     }
 }

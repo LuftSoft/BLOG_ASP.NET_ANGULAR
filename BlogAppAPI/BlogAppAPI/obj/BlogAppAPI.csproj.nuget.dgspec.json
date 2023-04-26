@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\visual_studio\\BlogAppAPI\\BlogAppAPI\\BlogAppAPI.csproj": {}
+    "D:\\visual_studio\\myblog\\BlogAppAPI\\BlogAppAPI\\BlogAppAPI.csproj": {}
   },
   "projects": {
-    "D:\\visual_studio\\BlogAppAPI\\BlogAppAPI\\BlogAppAPI.csproj": {
+    "D:\\visual_studio\\myblog\\BlogAppAPI\\BlogAppAPI\\BlogAppAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\visual_studio\\BlogAppAPI\\BlogAppAPI\\BlogAppAPI.csproj",
+        "projectUniqueName": "D:\\visual_studio\\myblog\\BlogAppAPI\\BlogAppAPI\\BlogAppAPI.csproj",
         "projectName": "BlogAppAPI",
-        "projectPath": "D:\\visual_studio\\BlogAppAPI\\BlogAppAPI\\BlogAppAPI.csproj",
+        "projectPath": "D:\\visual_studio\\myblog\\BlogAppAPI\\BlogAppAPI\\BlogAppAPI.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\visual_studio\\BlogAppAPI\\BlogAppAPI\\obj\\",
+        "outputPath": "D:\\visual_studio\\myblog\\BlogAppAPI\\BlogAppAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -44,6 +44,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "CloudinaryDotNet": {
+              "target": "Package",
+              "version": "[1.20.0, )"
+            },
             "MailKit": {
               "target": "Package",
               "version": "[3.5.0, )"

@@ -1,6 +1,8 @@
 ﻿using BlogAppAPI.Models;
+using BlogAppAPI.Services.Payload;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Org.BouncyCastle.Ocsp;
 
 namespace BlogAppAPI.Controllers
 {
@@ -25,13 +27,27 @@ namespace BlogAppAPI.Controllers
                 if (pageInt >= 0 && pageInt <= totalPage)
                 {
                     var rel = listCate.Skip(pageNumber* pageInt).Take(pageNumber).ToList();
-                    return Ok(rel);
+                    return Ok(new APIResponse()
+                    {
+                        Success = true,
+                        Payload = new { rel = rel, page_total = totalPage }
+                    });
                 }
-                return Redirect("api/v1/category/list?page=0");
+                return BadRequest(new APIResponse()
+                {
+                    Success = true,
+                    Message = "can't get list category"
+                });
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(
+                        new APIResponse()
+                        {
+                            Success = true,
+                            Message = ex.Message
+                        }
+                    );
             }
         }
 
@@ -51,16 +67,26 @@ namespace BlogAppAPI.Controllers
         }
         [HttpPost]
         public async Task<IActionResult> create(Category category)
-        {
+        {   
             try
             {
-                var rel = await context.Categories.AddAsync(category);
+                Console.WriteLine($"{category.Name} - {category.Description} - {category.CategorySlug}");
+                await context.Categories.AddAsync(category);
                 await context.SaveChangesAsync();
-                return Ok(rel.State);
+                return Ok(new APIResponse() {
+                    Success = true,
+                    StatusCode = System.Net.HttpStatusCode.OK,
+                    Message = "add category success!"
+                });
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new APIResponse()
+                {
+                    Success = false,
+                    StatusCode = System.Net.HttpStatusCode.OK,
+                    Message = ex.Message
+                });
             }
         }
         [HttpDelete]

@@ -1,18 +1,21 @@
 <h1 class="mbb-2">Thêm thể loại mới</h1>
-<form action="">
+<form (submit)="createCategory()">
     <div class="div">
         <label for="" class="form-label">Tên thể loại</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" name="categoryName" id="categoryName" [(ngModel)]="category.name"
+            placeholder="Tên thể loại">
         <p style="color: red;"></p>
     </div>
     <div class="div">
         <label for="" class="form-label">Mô tả</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" name="categoryDescription" id="categoryDescription"
+            [(ngModel)]="category.description" placeholder="Mô tả">
         <p style="color: red;"></p>
     </div>
     <div class="div mb-4">
         <label for="" class="form-label">Slug</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" name="categorySlug" id="categorySlug"
+            [(ngModel)]="category.categorySlug" placeholder="Slug">
         <p style="color: red;"></p>
     </div>
     <div>

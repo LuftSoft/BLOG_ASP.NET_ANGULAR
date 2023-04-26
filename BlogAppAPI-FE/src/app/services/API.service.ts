@@ -9,26 +9,23 @@ import { Observable } from 'rxjs';
 
 export class APIService {
   httpOption: any = {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${localStorage.getItem('token')}`
   }
   constructor(private httpclient: HttpClient) { }
   get(url: string) {
-    return this.httpclient.get(url)
+    return this.httpclient.get(url, this.httpOption)
   }
 
-  public post(url: string) {
-    return new Promise((resolve, reject) => {
-      resolve(this.httpclient.get(url));
-    });
+  public post(url: string, payload: any): Observable<any> {
+    return this.httpclient.post<any>(url, payload, this.httpOption);
   }
-  public put(url: string) {
-    return new Promise((resolve, reject) => {
-      resolve(this.httpclient.get(url));
-    });
+  public put(url: string, payload: any) {
+    return this.httpclient.put(url, payload, this.httpOption);
   }
   public delete(url: string) {
     return new Promise((resolve, reject) => {
-      resolve(this.httpclient.get(url));
+      resolve(this.httpclient.get(url, this.httpOption));
     });
   }
 }

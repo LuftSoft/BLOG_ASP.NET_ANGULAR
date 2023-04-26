@@ -1,4 +1,4 @@
-﻿namespace BlogAppAPI.Services
+﻿namespace BlogAppAPI.Services.Sendmail
 {
     public interface ISendMailService
     {

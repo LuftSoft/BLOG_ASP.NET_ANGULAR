@@ -1,0 +1,15 @@
+<nav aria-label="Page navigation example" class="my-4">
+    <ul class="pagination">
+        <li class="page-item" (click)="pageChange(0)">
+            <a class="page-link" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li class="page-item" *ngFor="let i of arrayPage" (click)="pageChange(i)"><a class="page-link">{{i+1}}</a></li>
+        <li class="page-item" (click)="pageChange(page_total - 1)">
+            <a class="page-link" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>

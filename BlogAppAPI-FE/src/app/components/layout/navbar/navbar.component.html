@@ -10,33 +10,46 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" [routerLink]="['/post/list']">POST</a>
+                        <a class="nav-link active" aria-current="page" [routerLink]="['/']">NEW</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" [routerLink]="['/category/list']">CATEGORY</a>
+                        <a class="nav-link active" aria-current="page" [routerLink]="['/']">TRENDING</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" [routerLink]="['/tag/list']">TAG</a>
+                        <a class="nav-link active" aria-current="page" [routerLink]="['/post']"
+                            [queryParams]="{category:'lap-trinh-web'}">WEB</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" [routerLink]="['/user/list']">USER</a>
+                        <a class="nav-link active" aria-current="page" [routerLink]="['/post']"
+                            [queryParams]="{category:'lap-trinh-mobile'}">MOBILE</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" [routerLink]="['/role/list']">ROLE</a>
+                        <a class="nav-link active" aria-current="page" [routerLink]="['/post']"
+                            [queryParams]="{category:'database'}">DATABASE</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" tabindex="-1"></a>
+                        <a class="nav-link active" aria-current="page" [routerLink]="['/']">OTHER</a>
+                    </li>
+                    <!-- *ngIf="data.User" -->
+                    <li class="nav-item" *ngIf="data.User">
+                        <a class="nav-link active" aria-current="page" [routerLink]="['/manage']">MANAGE</a>
                     </li>
                 </ul>
                 <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control me-2" id="searchInout" name="searchInput" [(ngModel)]="searchInput"
+                        type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline"
                         style="color: rgba(249, 58, 19, 1);border: 1px solid rgba(249, 58, 19, 1);"
-                        type="submit">Search</button>
+                        (click)="search()">Search</button>
                 </form>
-                <span>
-                    <a class="ms-3" style="color: white;text-decoration: none;" [routerLink]="['/auth/signin']">Đăng
-                        nhập</a></span>
+                <span class="nav-item" *ngIf="data.User==null">
+                    <a class="ms-3 nav-link" style="color: white;text-decoration: none;"
+                        [routerLink]="['/auth/signin']">Đăngnhập</a>
+                </span>
+                <span class="nav-item" *ngIf="data.User != null">
+                    <a class="ms-3 nav-link" style="color: white;text-decoration: none;"
+                        [routerLink]="['/user/profile',data.User.userId]">{{data.User.userName}}</a>
+                </span>
             </div>
         </div>
     </nav>

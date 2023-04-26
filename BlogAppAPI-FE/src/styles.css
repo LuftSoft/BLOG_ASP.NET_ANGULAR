@@ -81,4 +81,6 @@ tr {
 
 .list-group-item-action:hover {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(57, 17, 109, 0.3) 0px 8px 16px -8px;
+    transform: scale(1.005);
+    transition: all 0.2s;
 }
