@@ -21,7 +21,7 @@ export class ListCategoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.api.get(`https://localhost:7163/api/v1/category/list?page=${this.page}`).subscribe(
+    this.api.get(`${this.data.URL}/category/list?page=${this.page}`).subscribe(
       {
         next: (res) => {
           this.cates = res['payload'].rel;
